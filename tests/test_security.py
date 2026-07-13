@@ -1,4 +1,3 @@
-from pathlib import Path
 
 from mcp_preflight.checks.security import check_security
 from mcp_preflight.loader import load_server_spec

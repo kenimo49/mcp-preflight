@@ -114,9 +114,7 @@ def _is_tool_decorator(dec: ast.expr) -> tuple[bool, dict[str, Any]]:
         target = dec
 
     is_tool = False
-    if isinstance(target, ast.Attribute) and target.attr == "tool":
-        is_tool = True
-    elif isinstance(target, ast.Name) and target.id == "tool":
+    if isinstance(target, ast.Attribute) and target.attr == "tool" or isinstance(target, ast.Name) and target.id == "tool":
         is_tool = True
 
     if call is not None and is_tool:
@@ -129,16 +127,17 @@ def _is_tool_decorator(dec: ast.expr) -> tuple[bool, dict[str, Any]]:
 def _server_name_from_ast(tree: ast.AST) -> str | None:
     """Extract the FastMCP server name from `FastMCP("...")` construction."""
     for node in ast.walk(tree):
-        if isinstance(node, ast.Assign):
-            if isinstance(node.value, ast.Call):
-                func = node.value.func
-                is_fastmcp = (isinstance(func, ast.Name) and func.id == "FastMCP") or (
-                    isinstance(func, ast.Attribute) and func.attr == "FastMCP"
-                )
-                if is_fastmcp and node.value.args:
-                    first = node.value.args[0]
-                    if isinstance(first, ast.Constant) and isinstance(first.value, str):
-                        return first.value
+        if not (isinstance(node, ast.Assign) and isinstance(node.value, ast.Call)):
+            continue
+        func = node.value.func
+        is_fastmcp = (isinstance(func, ast.Name) and func.id == "FastMCP") or (
+            isinstance(func, ast.Attribute) and func.attr == "FastMCP"
+        )
+        if not (is_fastmcp and node.value.args):
+            continue
+        first = node.value.args[0]
+        if isinstance(first, ast.Constant) and isinstance(first.value, str):
+            return first.value
     return None
 
 
