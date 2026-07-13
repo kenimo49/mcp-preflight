@@ -3,12 +3,16 @@
 All notable changes to `mcp-scorecard` will be documented in this file.
 The format is loosely based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
-## [0.1.0] — 2026-07-13
+## [0.1.1] — 2026-07-13
 
 ### Changed
 - Renamed from `mcp-preflight` to `mcp-scorecard` before first PyPI upload
-  (an unrelated `mcp-preflight` project already occupies that PyPI namespace).
-  Package, CLI, MCP server, and repository are all `mcp-scorecard` from v0.1.0.
+  (an unrelated `mcp-preflight` project already occupies that PyPI namespace,
+  and `mcp-pre-flight` was also rejected as too similar). Package, CLI, MCP
+  server, and repository are all `mcp-scorecard` from v0.1.1. v0.1.0 exists
+  only as a pre-rename local tag and was never published.
+
+## [0.1.0] — 2026-07-13 (unpublished)
 
 ### Added
 - Four-layer scorecard model: Passive Footprint / Use-Case Scoping / Security / Name Safety.
