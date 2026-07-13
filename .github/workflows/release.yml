@@ -31,11 +31,17 @@ jobs:
       - name: Verify package metadata
         run: twine check dist/*
 
-      - name: Upload to GitHub Release
+      - name: Create or update GitHub Release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release upload "${GITHUB_REF##*/}" dist/* --clobber
+          TAG="${GITHUB_REF##*/}"
+          if ! gh release view "$TAG" >/dev/null 2>&1; then
+            gh release create "$TAG" \
+              --title "$TAG" \
+              --notes "Automated release for $TAG. See CHANGELOG.md for details."
+          fi
+          gh release upload "$TAG" dist/* --clobber
 
       # PyPI publishing is handled by publish.yml (Trusted Publisher / OIDC).
       # This workflow only uploads the sdist + wheel to the GitHub Release.
