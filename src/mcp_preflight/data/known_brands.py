@@ -79,5 +79,5 @@ KNOWN_MCPS: list[str] = [
     "rag-db-advisor",
     "rag-retriever-bench",
     "opencut-mcp",
-    "mcp-preflight",
+    "mcp-scorecard",
 ]

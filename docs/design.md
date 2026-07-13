@@ -1,4 +1,4 @@
-# mcp-preflight — design doc
+# mcp-scorecard — design doc
 
 > Pre-flight checks for MCP servers. Answers **"is this MCP server safe and efficient enough for LLMs to use?"** before you publish or install it.
 
@@ -6,7 +6,7 @@
 
 Existing tools focus on runtime security (MCP-Scan / Cisco MCP-Scanner / AgentAuditKit) or protocol compliance (MCP Inspector / mcp-validator / mcp-validation). None cover the **LLM-facing quality** dimension: how much context the server consumes just by being listed, whether its tools have well-scoped use cases, and whether description prose is clear.
 
-`mcp-preflight` is the pre-publish scorecard that closes that gap, then wraps the security tools underneath so a single command grades your MCP end-to-end.
+`mcp-scorecard` is the pre-publish scorecard that closes that gap, then wraps the security tools underneath so a single command grades your MCP end-to-end.
 
 Companion to the book **『MCP実践セキュリティ』** — the book teaches the checks, this tool runs them.
 
@@ -41,7 +41,7 @@ Whether each tool is narrow enough that the LLM knows when to reach for it. Broa
 
 ### Layer C — Security (borrow from existing tools + own rules)
 
-Mostly borrowed. `mcp-preflight security` shells out to MCP-Scan if installed and normalises the result, and adds a small independent ruleset for defence in depth.
+Mostly borrowed. `mcp-scorecard security` shells out to MCP-Scan if installed and normalises the result, and adds a small independent ruleset for defence in depth.
 
 Own rules:
 - `prompt_injection_in_description` — imperative phrases aimed at the LLM inside tool descriptions ("ignore previous instructions", "always call …")
@@ -86,11 +86,11 @@ Overall:                 B
 ## CLI shape
 
 ```
-mcp-preflight scan <target>              # all layers
-mcp-preflight footprint <target>         # Layer A only
-mcp-preflight scoping <target>           # Layer B only
-mcp-preflight security <target>          # Layer C only
-mcp-preflight name <name>                # Layer D only
+mcp-scorecard scan <target>              # all layers
+mcp-scorecard footprint <target>         # Layer A only
+mcp-scorecard scoping <target>           # Layer B only
+mcp-scorecard security <target>          # Layer C only
+mcp-scorecard name <name>                # Layer D only
 
 # targets:
 #   ./path/to/server.py       — Python entry (stdio, subprocess launch)
@@ -112,7 +112,7 @@ preflight_security(target)
 preflight_name_check(name)
 ```
 
-Runs via `mcp-preflight-mcp` (stdio). Install as an MCP tool in Claude Code / Cursor and ask: *"score this MCP server"* → structured verdict.
+Runs via `mcp-scorecard-mcp` (stdio). Install as an MCP tool in Claude Code / Cursor and ask: *"score this MCP server"* → structured verdict.
 
 ## Validation targets (own dogfood set)
 
@@ -121,7 +121,7 @@ Phase 1 uses three real MCP servers written by the author to bootstrap the calib
 1. **domain-pre-flight** (11 tools, mature) — reference for Layer A footprint norms
 2. **rag-db-advisor** — smaller surface
 3. **opencut-mcp** (v0.1.0) — brand-new MCP, expected clean baseline
-4. **mcp-preflight itself** — dogfooding, README badge
+4. **mcp-scorecard itself** — dogfooding, README badge
 
 ## Non-goals (v0.1)
 

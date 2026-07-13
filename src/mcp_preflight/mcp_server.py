@@ -1,7 +1,7 @@
-"""MCP server exposing mcp-preflight checks as tools.
+"""MCP server exposing mcp-scorecard checks as tools.
 
-Install with: pip install "mcp-preflight[mcp]"
-Run via:      mcp-preflight-mcp
+Install with: pip install "mcp-scorecard[mcp]"
+Run via:      mcp-scorecard-mcp
 """
 
 from __future__ import annotations
@@ -13,7 +13,7 @@ try:
     from mcp.server.fastmcp import FastMCP
 except ImportError as e:  # pragma: no cover
     raise SystemExit(
-        "The MCP server requires the 'mcp' extra: pip install 'mcp-preflight[mcp]'"
+        "The MCP server requires the 'mcp' extra: pip install 'mcp-scorecard[mcp]'"
     ) from e
 
 from .checks.footprint import check_footprint
@@ -23,7 +23,7 @@ from .checks.score import aggregate
 from .checks.security import check_security
 from .loader import load_server_spec, load_server_spec_from_directory
 
-mcp = FastMCP("mcp-preflight")
+mcp = FastMCP("mcp-scorecard")
 
 
 def _load(target: str):

@@ -44,7 +44,7 @@ def _dump(data: dict[str, Any], as_json: bool) -> None:
 
 
 @click.group()
-@click.version_option(package_name="mcp-preflight")
+@click.version_option(package_name="mcp-scorecard")
 def main() -> None:
     """Pre-flight checks for MCP servers."""
 
@@ -144,7 +144,7 @@ def name(name: str, as_json: bool) -> None:
 
 
 def _render_scorecard(card) -> None:
-    console.rule(f"[bold]mcp-preflight[/bold] · {card.server_name or 'unnamed'}")
+    console.rule(f"[bold]mcp-scorecard[/bold] · {card.server_name or 'unnamed'}")
     console.print(
         f"Overall grade: [bold]{card.overall_grade}[/bold] "
         f"({card.overall_band}) · tools={card.tool_count}"

@@ -1,9 +1,14 @@
 # Changelog
 
-All notable changes to `mcp-preflight` will be documented in this file.
+All notable changes to `mcp-scorecard` will be documented in this file.
 The format is loosely based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [0.1.0] — 2026-07-13
+
+### Changed
+- Renamed from `mcp-preflight` to `mcp-scorecard` before first PyPI upload
+  (an unrelated `mcp-preflight` project already occupies that PyPI namespace).
+  Package, CLI, MCP server, and repository are all `mcp-scorecard` from v0.1.0.
 
 ### Added
 - Four-layer scorecard model: Passive Footprint / Use-Case Scoping / Security / Name Safety.
@@ -17,8 +22,8 @@ The format is loosely based on [Keep a Changelog](https://keepachangelog.com/en/
   secret regex sweep (AWS / GitHub / OpenAI / Anthropic / Slack / PEM).
 - Layer D — name safety: case collision, Levenshtein brand similarity,
   separator variants, namespace hygiene. Bundled ~50 brands + known MCPs.
-- CLI: `mcp-preflight` / `mpf` with `scan`, `footprint`, `scoping`, `security`, `name`.
-- MCP server: `mcp-preflight-mcp` exposes five preflight_* tools over stdio.
+- CLI: `mcp-scorecard` / `mpf` with `scan`, `footprint`, `scoping`, `security`, `name`.
+- MCP server: `mcp-scorecard-mcp` exposes five preflight_* tools over stdio.
 - Dogfood/validation on domain-pre-flight, rag-db-advisor, opencut-mcp, and self.
 - CI: pytest on 3.10 / 3.11 / 3.12, ruff.
 - TypeScript static manifest extractor: `scripts/extract_ts_manifest.py`.

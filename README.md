@@ -1,4 +1,4 @@
-# mcp-preflight
+# mcp-scorecard
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![GitHub Sponsors](https://img.shields.io/github/sponsors/kenimo49?logo=githubsponsors&label=Sponsor)](https://github.com/sponsors/kenimo49)
@@ -9,7 +9,7 @@
 
 Pre-flight checks for MCP (Model Context Protocol) servers.
 
-`mcp-preflight` answers one question: **"Is this MCP server safe and efficient enough for LLMs to actually use?"** — before you publish it, install it, or let it into your agent config.
+`mcp-scorecard` answers one question: **"Is this MCP server safe and efficient enough for LLMs to actually use?"** — before you publish it, install it, or let it into your agent config.
 
 Existing MCP tools cover runtime security (MCP-Scan) and protocol compliance (MCP Inspector). This one covers the missing layer: **how expensive is the server just to keep registered, and are its tools scoped well enough for an LLM to pick the right one?**
 
@@ -29,39 +29,39 @@ Design details: [docs/design.md](docs/design.md).
 ## Install
 
 ```bash
-pip install mcp-preflight              # CLI + library
-pip install "mcp-preflight[mcp]"       # + MCP server (stdio)
+pip install mcp-scorecard              # CLI + library
+pip install "mcp-scorecard[mcp]"       # + MCP server (stdio)
 ```
 
 ## Use as a CLI
 
 ```bash
 # Full scan
-mcp-preflight scan ./path/to/server.py
-mcp-preflight scan http://localhost:8000/
-mcp-preflight scan pypi:some-mcp
+mcp-scorecard scan ./path/to/server.py
+mcp-scorecard scan http://localhost:8000/
+mcp-scorecard scan pypi:some-mcp
 
 # Layer-only
-mcp-preflight footprint ./server.py
-mcp-preflight scoping ./server.py
-mcp-preflight security ./server.py
-mcp-preflight name my-new-mcp
+mcp-scorecard footprint ./server.py
+mcp-scorecard scoping ./server.py
+mcp-scorecard security ./server.py
+mcp-scorecard name my-new-mcp
 
 # CI-friendly
-mcp-preflight scan ./server.py --json
-mcp-preflight scan ./server.py --format sarif
+mcp-scorecard scan ./server.py --json
+mcp-scorecard scan ./server.py --format sarif
 # exit codes: 0=GREEN/YELLOW, 1=ORANGE, 2=RED
 ```
 
 ## Use as an MCP server (self-hosting)
 
-Register `mcp-preflight` itself as an MCP tool in Claude Code / Cursor / Windsurf, then ask the LLM to audit another MCP:
+Register `mcp-scorecard` itself as an MCP tool in Claude Code / Cursor / Windsurf, then ask the LLM to audit another MCP:
 
 ```json
 {
   "mcpServers": {
-    "mcp-preflight": {
-      "command": "mcp-preflight-mcp"
+    "mcp-scorecard": {
+      "command": "mcp-scorecard-mcp"
     }
   }
 }
@@ -73,7 +73,7 @@ Then in chat: *"score the MCP server at ./my-server.py"*.
 
 Every tool description and inputSchema in a registered MCP server is sent to the LLM on every turn — because the model needs to see them to decide which tool to call. A single verbose server can silently burn 5,000+ tokens per turn before anyone touches it.
 
-`mcp-preflight footprint` measures exactly that, so you can trim before you publish.
+`mcp-scorecard footprint` measures exactly that, so you can trim before you publish.
 
 ## Roadmap
 

@@ -201,7 +201,7 @@ def load_server_spec_from_manifest(manifest_path: str | Path) -> ServerSpec:
     """Load from a JSON manifest matching the MCP `tools/list` response shape.
 
     Use this for non-Python MCP servers: dump their tools/list output to
-    JSON and point mcp-preflight at it. Expected shape:
+    JSON and point mcp-scorecard at it. Expected shape:
 
         {"tools": [{"name": "...", "description": "...", "inputSchema": {...}}]}
 

@@ -1,7 +1,7 @@
 """Quick-and-dirty TypeScript tools/list extractor.
 
 Reads a TS file containing a `ListToolsRequestSchema` handler with a static
-tools literal and writes an mcp-preflight manifest JSON.
+tools literal and writes an mcp-scorecard manifest JSON.
 
     python scripts/extract_ts_manifest.py path/to/index.ts \\
         --server-name opencut-mcp -o /tmp/opencut-mcp-manifest.json

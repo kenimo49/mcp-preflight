@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "mcp-preflight"
+name = "mcp-scorecard"
 version = "0.1.0"
 description = "Pre-flight checks for MCP servers: passive token footprint, use-case scoping, security, and name safety. LLM-facing quality scorecard."
 readme = "README.md"
@@ -43,15 +43,15 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/kenimo49/mcp-preflight"
-Repository = "https://github.com/kenimo49/mcp-preflight"
-Issues = "https://github.com/kenimo49/mcp-preflight/issues"
+Homepage = "https://github.com/kenimo49/mcp-scorecard"
+Repository = "https://github.com/kenimo49/mcp-scorecard"
+Issues = "https://github.com/kenimo49/mcp-scorecard/issues"
 Funding = "https://github.com/sponsors/kenimo49"
 
 [project.scripts]
-mcp-preflight = "mcp_preflight.cli:main"
+mcp-scorecard = "mcp_preflight.cli:main"
 mpf = "mcp_preflight.cli:main"
-mcp-preflight-mcp = "mcp_preflight.mcp_server:run"
+mcp-scorecard-mcp = "mcp_preflight.mcp_server:run"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/mcp_preflight"]

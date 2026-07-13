@@ -1,4 +1,4 @@
-"""mcp-preflight — pre-flight checks for MCP servers.
+"""mcp-scorecard — pre-flight checks for MCP servers.
 
 Four layers:
     A. Passive Footprint  — tokens consumed by tools/list alone
