@@ -4,6 +4,8 @@
 [![GitHub Sponsors](https://img.shields.io/github/sponsors/kenimo49?logo=githubsponsors&label=Sponsor)](https://github.com/sponsors/kenimo49)
 [![Ko-fi](https://img.shields.io/badge/Ko--fi-tip-FF5E5B?logo=kofi&logoColor=white)](https://ko-fi.com/kenimo49)
 
+![A mechanic doing a pre-flight checklist inspection on a small propeller plane in a hangar](docs/hero.jpg)
+
 > ⚠️ **Status: v0.1 alpha — under active development.**
 > Rules, thresholds, and scoring are being calibrated against real-world MCP servers.
 
